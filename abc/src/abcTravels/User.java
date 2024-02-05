@@ -11,7 +11,7 @@ public class User {
 	int accountStatus;
 	public User(String fname, String lname, String phno, String gen, String email, String password, int failCount,
 			int accountStatus) {
-		super();
+	
 		this.fname = fname;
 		this.lname = lname;
 		this.phno = phno;

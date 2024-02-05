@@ -84,13 +84,13 @@ public class MainApp {
 	 */
 	static void getLogo() {
 		try {
-			File f=new File("E:\\javaEclipseProjects\\abc\\src\\logo.txt");//Make sure to give correct file path of logo
+			File f=new File("C:\\Users\\phsss\\git\\ABC-Travels\\abc\\src\\logo.txt");//Make sure to give correct file path of logo
 
 			FileInputStream fis=new FileInputStream(f);
 			int i=0;
 			while((i=fis.read())!=-1) {
 				System.out.print((char)i);
-				i=fis.read();
+				
 
 			}
 			fis.close();
@@ -186,13 +186,14 @@ public class MainApp {
 	static void login() {
 		System.out.println("Enter your Phone Number");
 		String tempphone=sc.next();
+		phoneverify(tempphone); 
 		System.out.println("Enter your Password");
 		String temppassword=sc.next();
-		phoneverify(tempphone); 
 		if(mp.containsKey(phno)) {
 			if(mp.get(phno).failCount<6) {
 				if(mp.get(phno).password.equals(temppassword)) {
 					System.out.println("You Have Logged Successfully!!!!!!!");
+					mp.get(phno).failCount=0;// if user logged in successfully then failed count must be 0
 					System.out.println("---------------------------------------------------------------------------------------------------------------------------");
 					System.out.println("You Can Proceed to Booking");
 					System.out.println("---------------------------------------------------------------------------------------------------------------------------");
@@ -251,7 +252,7 @@ public class MainApp {
 			break;
 		}
 		}
-		if(custom.getDayOfWeek().toString().toLowerCase().equals("saturday")||custom.getDayOfWeek().toString().toLowerCase().equals("sunday")) {
+		if(custom.getDayOfWeek().toString().equalsIgnoreCase("saturday")||custom.getDayOfWeek().toString().equalsIgnoreCase("sunday")) {
 			totalfare+=200;
 		}
 		gst(totalfare);
@@ -277,7 +278,7 @@ public class MainApp {
 				custom=tempcustom;
 			}
 			else {
-				System.out.println("you can book dates after today not before today"+"PLEASE INSERT PROPER DATE!!!!");
+				System.out.println("you can book dates after or today not before today"+"PLEASE INSERT PROPER DATE!!!!");
 				dateverify();
 			}
 		}
@@ -299,7 +300,7 @@ public class MainApp {
 		System.out.println("You Are Trying To Rescheduling Your Date Of Journey");
 		LocalDate temp=custom;
 		dateverify();
-		if(custom.getDayOfWeek().toString().toLowerCase().equals("sunday")||custom.getDayOfWeek().toString().toLowerCase().equals("saturday")) {
+		if(custom.getDayOfWeek().toString().equalsIgnoreCase("sunday")||custom.getDayOfWeek().toString().equalsIgnoreCase("saturday")) {
 			if(temp.getDayOfWeek().toString().toLowerCase().equals("sunday")||temp.getDayOfWeek().toString().toLowerCase().equals("saturday")) {
 				System.out.println("There has been no change in your Total Fare");
 				System.out.println("Total Fare is "+totalfare);
